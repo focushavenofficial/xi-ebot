@@ -41,16 +41,23 @@ const PORT = 8000;
 })();
 
 setInterval(() => {
-  console.log('14 minutes passed, running task.')
+  console.log('14 minutes passed, running task.');
 
-  // Perform your task here
-  fetch(`https://minecraft-afk-bot-for-lonville.onrender.com/api/v1/uptime-keeper`, {
+  fetch("https://minecraft-afk-bot-for-lonville-1.onrender.com/api/v1/uptime-keeper", {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ important: 'data' })
   })
-    .then(res => res.json())
-    .then(data => console.log('Task complete:', data.message))
-    .catch(err => console.error('Error:', err))
+    .then(async res => {
+      const text = await res.text(); // Get raw response
+      console.log('Raw response:', text);
 
-}, 1 * 30 * 1000)
+      try {
+        const data = JSON.parse(text);
+        console.log('Task complete:', data.message);
+      } catch (err) {
+        console.warn('Could not parse JSON:', err);
+      }
+    })
+    .catch(err => console.error('Fetch error:', err));
+}, 14 * 60 * 1000);

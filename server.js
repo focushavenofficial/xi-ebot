@@ -7,7 +7,7 @@ export default async function CreateServer(){
     app.use(cors());                         
     app.use(express.json());
 
-    app.use("/api/v1/uptime-keeper", (req, res) =>  res.status(200).json({ message: "Uptime keeper is working!" }));
+    app.post("/api/v1/uptime-keeper", (req, res) =>  res.status(200).json({ message: "Uptime keeper is working!" }));
     app.use("/api/v1/test", (req, res) => res.status(200).json({"Test":"Testing"}));
 
     return app
