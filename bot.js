@@ -1,5 +1,21 @@
 import mineflayer from 'mineflayer'
 import app from "./server.js";
+import { spawn } from 'child_process';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+function restartApp() {
+  console.log('Restarting bot...');
+  spawn('node', [__filename], {
+    stdio: 'inherit',
+    cwd: __dirname,
+  });
+  process.exit();
+}
 
 const bot = mineflayer.createBot({
   host: 'LonVilleSMP.aternos.me', // e.g., 'play.example.com'
@@ -24,7 +40,10 @@ bot.on('end', () => {
   }, 5000);
 });
 
-bot.on('error', err => console.log('Error:', err));
+bot.on('error', err => {
+  console.log('Error:', err);
+  restartApp()
+});
 
 
 const PORT = 8000;
@@ -37,6 +56,7 @@ const PORT = 8000;
     });
   } catch (e) {
     console.error("Connection error:", e);
+    restartApp()
   }
 })();
 
@@ -57,6 +77,7 @@ setInterval(() => {
         console.log('Task complete:', data.message);
       } catch (err) {
         console.warn('Could not parse JSON:', err);
+        restartApp()
       }
     })
     .catch(err => console.error('Fetch error:', err));
