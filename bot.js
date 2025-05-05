@@ -3,6 +3,7 @@ import app from "./server.js";
 import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -20,7 +21,8 @@ function restartApp() {
 const bot = mineflayer.createBot({
   host: 'LonVilleSMP.aternos.me', // e.g., 'play.example.com'
   port: 30660,             // default Minecraft port
-  username: 'AFK_Bot'      // can be an email if using a real account
+  username: `AFK_bot`,   // can be an email if using a real account
+   version: '1.20.4'
         // password: 'your_password', // only if using a real Mojang/Microsoft account
 });
 
@@ -33,11 +35,15 @@ bot.on('spawn', () => {
   }, 30000);
 });
 
-bot.on('end', () => {
-  console.log('Bot was disconnected. Reconnecting...');
+bot.on('end', (reason) => {
+  console.log('Bot was disconnected. Reason:', reason);
   setTimeout(() => {
-    process.exit(); // optional: restart with pm2 or another manager
+    restartApp();
   }, 5000);
+});
+
+bot.on('kicked', (reason) => {
+  console.log('Kicked from server:', reason);
 });
 
 bot.on('error', err => {
