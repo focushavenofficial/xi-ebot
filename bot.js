@@ -21,7 +21,7 @@ function restartApp() {
 const bot = mineflayer.createBot({
   host: 'LonVilleSMP.aternos.me', // e.g., 'play.example.com'
   port: 30660,             // default Minecraft port
-  username: `LonVille Bot`,   // can be an email if using a real account
+  username: `LonVille AFK_BOT`,   // can be an email if using a real account
    version: '1.20.4'
         // password: 'your_password', // only if using a real Mojang/Microsoft account
 });
