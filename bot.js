@@ -28,11 +28,14 @@ const bot = mineflayer.createBot({
 
 bot.on('spawn', () => {
   console.log('Bot has spawned and is now AFK.');
-          // Just jump every 30 seconds to prevent being kicked
+  const controls = ['forward', 'back', 'left', 'right', 'jump'];
+  // Just jump every 30 seconds to prevent being kicked
   setInterval(() => {
-    bot.setControlState('jump', true);
-    setTimeout(() => bot.setControlState('jump', false), 500);
-  }, 30000);
+    const randomControl = controls[Math.floor(Math.random() * controls.length)];
+    const randomDuration = Math.floor(Math.random() * (8000 - 2000 + 1)) + 2000;
+    bot.setControlState(randomControl, true);
+    setTimeout(() => bot.setControlState(randomControl, false), randomDuration);
+  }, 12000);
 });
 
 bot.on('end', (reason) => {
