@@ -3,7 +3,6 @@ import app from "./server.js";
 import { spawn } from 'child_process';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { v4 as uuidv4 } from 'uuid';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,8 +20,8 @@ function restartApp() {
 const bot = mineflayer.createBot({
   host: 'LonVilleSMP.aternos.me', // e.g., 'play.example.com'
   port: 30660,             // default Minecraft port
-  username: `AFK_Bot`,   // can be an email if using a real account
-   version: '1.20.4'
+  username: `LonVille AFK Bot`,   // can be an email if using a real account
+   version: '1.21.4'
         // password: 'your_password', // only if using a real Mojang/Microsoft account
 });
 
