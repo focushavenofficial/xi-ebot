@@ -71,7 +71,9 @@ const PORT = 8000;
 setInterval(() => {
   console.log('14 minutes passed, running task.');
 
-  fetch("/api/v1/uptime-keeper", {
+  fetch((process.env.RENDER_EXTERNAL_URL || "http://localhost:3000") + "/api/v1/uptime-keeper")
+  .catch(err => console.error("Uptime keeper failed:", err))
+, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ important: 'data' })
