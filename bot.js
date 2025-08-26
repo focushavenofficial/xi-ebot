@@ -71,7 +71,7 @@ const PORT = 8000;
 setInterval(() => {
   console.log('14 minutes passed, running task.');
 
-  fetch("https://minecraft-afk-bot-for-lonville-1.onrender.com/api/v1/uptime-keeper", {
+  fetch("/api/v1/uptime-keeper", {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ important: 'data' })
