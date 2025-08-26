@@ -77,7 +77,7 @@ setInterval(() => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ important: 'data' })
-  })
+  }
     .then(async res => {
       const text = await res.text(); // Get raw response
       console.log('Raw response:', text);
